@@ -24,7 +24,7 @@ module Teaspoon
     end
 
     def spec_files
-      glob.map { |file| { path: file, name: asset_from_file(file) } }
+      glob.map { |file| { path: asset_from_file(file), name: asset_from_file(file) } }
     end
 
     def spec_assets(include_helper = true)
@@ -85,19 +85,13 @@ module Teaspoon
     end
 
     def asset_from_file(original)
-      filename = original
-      Rails.application.config.assets.paths.each do |path|
-        filename = filename.gsub(%r(^#{Regexp.escape(path.to_s)}[\/|\\]), "")
-      end
+      filename = original.gsub(Rails.root + "/spec/javascripts/", "")
 
-      raise Teaspoon::AssetNotServableError.new(filename: filename) if filename == original
       normalize_js_extension(filename)
     end
 
     def normalize_js_extension(original_filename)
-      config.js_extensions.inject(original_filename.gsub(".erb", "")) do |filename, extension|
-        filename.gsub(Regexp.new(extension.to_s + "$"), ".js")
-      end
+      return original_filename
     end
 
     def glob

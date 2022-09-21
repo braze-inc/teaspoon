@@ -16,6 +16,4 @@ Gem::Specification.new do |s|
 
   s.files       = Dir["{lib}/**/*"]
   s.test_files  = `git ls-files -- {spec}/*`.split("\n")
-
-  s.add_dependency "teaspoon", [">= 1.0.0"]
 end
