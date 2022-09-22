@@ -96,9 +96,7 @@ module Teaspoon
       end
 
       def asset_from_file(original)
-        filename = original.gsub(Rails.root + "/spec/javascripts/", "")
-  
-        normalize_js_extension(filename)
+        return original.sub(/.+\/javascripts\//, "")
       end
   
       def normalize_js_extension(original_filename)
