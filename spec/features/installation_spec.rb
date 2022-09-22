@@ -6,7 +6,7 @@ feature "Installation", shell: true do
   end
 
   it "errors with the expected message" do
-    run_simple("bundle exec rails generate teaspoon:install --trace", false)
+    run_command_and_stop("bundle exec rails generate teaspoon:install --trace", fail_on_error: false)
 
     expect(last_command_started).to have_exit_status(1)
     expect(all_output).to include(<<-OUTPUT.strip_heredoc)
@@ -22,7 +22,7 @@ feature "Installation", shell: true do
         gem "teaspoon-mocha"
         gem "teaspoon-qunit"
 
-      More information can be found at: https://github.com/modeset/teaspoon
+      More information can be found at: https://github.com/jejacks0n/teaspoon
     OUTPUT
   end
 end

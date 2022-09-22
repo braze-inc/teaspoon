@@ -1,21 +1,16 @@
 source "https://rubygems.org"
+git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-gem "rails", "5.0.0.beta3"
 gemspec name: "teaspoon"
+gemspec name: "teaspoon-devkit"
 
-group :development, :test do
-  gemspec name: "teaspoon-devkit"
+gem "rails"
 
-  # frameworks
-  gem "teaspoon-jasmine", path: "teaspoon-jasmine"
-  gem "teaspoon-mocha", path: "teaspoon-mocha"
-  gem "teaspoon-qunit", path: "teaspoon-qunit"
+# frameworks
+gem "teaspoon-jasmine", path: "teaspoon-jasmine"
+gem "teaspoon-mocha", path: "teaspoon-mocha"
+gem "teaspoon-qunit", path: "teaspoon-qunit"
 
-  # gems that teaspoon can utilize
-  gem "selenium-webdriver"
-  gem "capybara-webkit"
-
-  # io services
-  gem "codeclimate-test-reporter", group: :test, require: false
-  gem "rubocop", require: false
-end
+# services
+gem "rubocop", require: false
+gem "rubocop-rails_config"

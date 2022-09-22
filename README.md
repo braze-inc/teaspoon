@@ -2,38 +2,34 @@ Teaspoon
 ========
 
 [![Gem Version](https://img.shields.io/gem/v/teaspoon.svg)](https://rubygems.org/gems/teaspoon)
-[![Dependency Status](https://gemnasium.com/modeset/teaspoon.svg)](https://gemnasium.com/modeset/teaspoon)
-[![Build Status](https://img.shields.io/travis/modeset/teaspoon.svg)](https://travis-ci.org/modeset/teaspoon)
-[![Code Climate](https://codeclimate.com/github/modeset/teaspoon/badges/gpa.svg)](https://codeclimate.com/github/modeset/teaspoon)
-[![Test Coverage](https://codeclimate.com/github/modeset/teaspoon/badges/coverage.svg)](https://codeclimate.com/github/modeset/teaspoon)
-[![License](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
+[![Build Status](https://travis-ci.org/jejacks0n/teaspoon.svg?branch=master)](https://travis-ci.org/jejacks0n/teaspoon)
+[![Maintainability](https://api.codeclimate.com/v1/badges/70c116d18acd407d9201/maintainability)](https://codeclimate.com/github/jejacks0n/teaspoon/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/70c116d18acd407d9201/test_coverage)](https://codeclimate.com/github/jejacks0n/teaspoon/test_coverage)
+[![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT)
+[![Reviewed by Hound](https://img.shields.io/badge/Reviewed_by-Hound-8E64B0.svg)](https://houndci.com)
 
-<img src="https://raw.github.com/modeset/teaspoon/master/screenshots/logo_big.png" alt="Logo by Morgan Keys" align="right" />
-<sup>Logo by [Morgan Keys](http://www.morganrkeys.com/)</sup>
+<img src="https://raw.github.com/jejacks0n/teaspoon/master/screenshots/logo_big.png" alt="Logo by Morgan Keys" align="right" />
+<sup>Logo by [Morgan Keys](https://twitter.com/morganrkeys)</sup>
 
-Teaspoon is a Javascript test runner built for Rails. It can run tests in the browser and headless using PhantomJS, Selenium WebDriver, or Capybara Webkit. It can also run your tests on selenium-webgrid providers such as [BrowserStack](https://www.browserstack.com).
-
-Feedback, ideas and pull requests are always welcome, or you can hit us up on Twitter @modeset_.
-
-[![Join the chat at https://gitter.im/modeset/teaspoon](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/modeset/teaspoon?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+Teaspoon is a Javascript test runner built for Rails. It can run tests in the browser and headless using PhantomJS, or Selenium WebDriver. It can also run your tests on selenium-webgrid providers such as [BrowserStack](https://www.browserstack.com).
 
 The goal of Teaspoon is to be simple to use while also providing the most complete Javascript testing solution for Rails.
 
 Teaspoon takes advantage of the Rails asset pipeline, and ships with support for Jasmine, Mocha, and QUnit.
 
-If you'd like to use Teaspoon with [Guard](https://github.com/guard/guard), check out the [guard-teaspoon](https://github.com/modeset/guard-teaspoon) project. Or, if you want to use the [Spring](https://github.com/rails/spring) preloader, try the unofficial [spring-commands-teaspoon](https://github.com/alejandrobabio/spring-commands-teaspoon).
+If you'd like to use Teaspoon with [Guard](https://github.com/guard/guard), check out the [guard-teaspoon](https://github.com/jejacks0n/guard-teaspoon) project. Or, if you want to use the [Spring](https://github.com/rails/spring) preloader, try the unofficial [spring-commands-teaspoon](https://github.com/alejandrobabio/spring-commands-teaspoon).
 
 
 ## Screenshots
 
 ### Running in the console
-![Console Reporter](https://raw.github.com/modeset/teaspoon/master/screenshots/console-reporter.png)
+![Console Reporter](https://raw.github.com/jejacks0n/teaspoon/master/screenshots/console-reporter.png)
 
 ### Running in the console using [Tapout](https://github.com/rubyworks/tapout)
-![Console Reporter Tapout](https://raw.github.com/modeset/teaspoon/master/screenshots/console-reporter-tapout.png)
+![Console Reporter Tapout](https://raw.github.com/jejacks0n/teaspoon/master/screenshots/console-reporter-tapout.png)
 
 ### Running in the browser
-![Browser Reporter](https://raw.github.com/modeset/teaspoon/master/screenshots/html-reporter.jpg)
+![Browser Reporter](https://raw.github.com/jejacks0n/teaspoon/master/screenshots/html-reporter.jpg)
 
 
 ## Table of Contents
@@ -66,14 +62,14 @@ Run the install generator to get the environment file and a basic spec helper. I
 rails generate teaspoon:install --coffee
 ```
 
-To run Teaspoon headless you'll need PhantomJS, Selenium Webdriver or Capybara Webkit. We recommend PhantomJS, which you can install with homebrew, npm or [as a download](http://phantomjs.org/download.html).
+To run Teaspoon headless you'll need PhantomJS or Selenium Webdriver.
 
 
 ## Usage
 
 Teaspoon uses the Rails asset pipeline to serve files. This allows you to use `= require` in your test files, and allows you use things like HAML or RABL/JBuilder within your fixtures.
 
-Here's a great [Quick Start Walkthrough](https://github.com/modeset/teaspoon/wiki/Quick-Start-Walkthrough) for writing and running your first tests.
+Here's a great [Quick Start Walkthrough](https://github.com/jejacks0n/teaspoon/wiki/Quick-Start-Walkthrough) for writing and running your first tests.
 
 You can run Teaspoon three ways -- in the browser, via the rake task, and using the command line interface (CLI).
 
@@ -140,7 +136,7 @@ describe("My great feature", function() {
 });
 ```
 
-You can also check out the examples of a [Mocha Spec](https://github.com/modeset/teaspoon/wiki/Using-Mocha), and a [QUnit Test](https://github.com/modeset/teaspoon/wiki/Using-QUnit).
+You can also check out the examples of a [Mocha Spec](https://github.com/jejacks0n/teaspoon/wiki/Using-Mocha), and a [QUnit Test](https://github.com/jejacks0n/teaspoon/wiki/Using-QUnit).
 
 ### Pending Specs
 
@@ -175,7 +171,7 @@ setTimeout(Teaspoon.execute, 1000); // defers execution for 1 second
 
 ### Using Require.js
 
-There's a wiki article that goes into more depth on using [RequireJS with Teaspoon](https://github.com/modeset/teaspoon/wiki/RequireJS-with-Teaspoon). But in simple terms you can configure your suite to boot with RequireJS by setting the suite `boot_partial` directive to `"boot_require_js"`.
+There's a wiki article that goes into more depth on using [RequireJS with Teaspoon](https://github.com/jejacks0n/teaspoon/wiki/RequireJS-with-Teaspoon). But in simple terms you can configure your suite to boot with RequireJS by setting the suite `boot_partial` directive to `"boot_require_js"`.
 
 Be sure to require `require.js` in your spec helper. Teaspoon doesn't include it as a support library, so you'll need to provide your own.
 
@@ -244,7 +240,7 @@ describe("Using fixtures", function() {
 });
 ```
 
-Check out some example of using fixtures with [Mocha](https://github.com/modeset/teaspoon/wiki/Using-Mocha), [QUnit](https://github.com/modeset/teaspoon/wiki/Using-QUnit).
+Check out some example of using fixtures with [Mocha](https://github.com/jejacks0n/teaspoon/wiki/Using-Mocha), [QUnit](https://github.com/jejacks0n/teaspoon/wiki/Using-QUnit).
 
 **Note:** The element that Teaspoon creates is "#teaspoon-fixtures", in case you need to access it directly and put your own fixtures in manually.
 
@@ -270,6 +266,20 @@ config.suite :my_suite do |suite|
   suite.helper = "my_spec_helper.js"
 end
 ```
+
+When defining multiple suites and running the tests on a CI (like Jenkins), you might need the output of `bundle exec teaspoon` in your XML-reports.
+To get one XML-file per suite you are running, you might want to add e.g a `junit` formatter which creates one result file per suite. 
+ 
+```ruby
+config.formatters = ["junit>#{Rails.root.join(["spec", "reports", "teaspoon_%{suite_name}.xml"])}"]
+``` 
+
+Will create a single file for each defined test-suite under `spec/reports/teasoon_%{suite_name}.xml`. 
+Allowed placeholders are:
+
+- `suite_name`: the name defined by your config (`config.suite :my_suite ...`)
+- `date`: the execution timestamp of your test (`Date.now.to_i`)
+
 
 ### Hooks
 
@@ -373,18 +383,18 @@ end
 
 ## Configuration
 
-When you install Teaspoon a `teaspoon_env.rb` file is generated that contains good documentation for each configuration directive. Otherwise you can get a refresher by checking the [Teaspoon Configuration](https://github.com/modeset/teaspoon/wiki/Teaspoon-Configuration) article.
+When you install Teaspoon a `teaspoon_env.rb` file is generated that contains good documentation for each configuration directive. Otherwise you can get a refresher by checking the [Teaspoon Configuration](https://github.com/jejacks0n/teaspoon/wiki/Teaspoon-Configuration) article.
 
 **Note** If you want `teaspoon_env.rb` to live in a location other than the default install path, you can specify an alternate path in a `TEASPOON_ENV` environment variable (eg `$ TEASPOON_ENV=config/teaspoon.rb teaspoon`).
 
 
 ## Test Frameworks
 
-[Jasmine](http://pivotal.github.com/jasmine) is one of the first BDD-style frameworks. We've been using Jasmine for a long time, and have been pretty happy with it. It lacks a few important things that could be in a test framework, so we've done a little bit of work to make that nicer. Like adding pending spec support.
+[Jasmine](https://jasmine.github.io/) is one of the first BDD-style frameworks. We've been using Jasmine for a long time, and have been pretty happy with it. It lacks a few important things that could be in a test framework, so we've done a little bit of work to make that nicer. Like adding pending spec support.
 
-[Mocha](http://visionmedia.github.com/mocha) came up while we were working on Teaspoon -- we read up about it and thought it was a pretty awesome library with some really great approaches to some of the things that some of us browser types should consider more often, so we included it and added support for it. We encourage you to give it a try. Read more about [Using Mocha](https://github.com/modeset/teaspoon/wiki/Using-Mocha) with Teaspoon.
+[Mocha](http://mochajs.org/) came up while we were working on Teaspoon -- we read up about it and thought it was a pretty awesome library with some really great approaches to some of the things that some of us browser types should consider more often, so we included it and added support for it. We encourage you to give it a try. Read more about [Using Mocha](https://github.com/jejacks0n/teaspoon/wiki/Using-Mocha) with Teaspoon.
 
-[QUnit](http://qunitjs.com) We're not sure about how many people use QUnit, but we like jQuery, so we added it. Read more about [Using QUnit](https://github.com/modeset/teaspoon/wiki/Using-QUnit) with Teaspoon.
+[QUnit](http://qunitjs.com) We're not sure about how many people use QUnit, but we like jQuery, so we added it. Read more about [Using QUnit](https://github.com/jejacks0n/teaspoon/wiki/Using-QUnit) with Teaspoon.
 
 If you'd like to see what frameworks and versions Teaspoon supports, you can run `rake teaspoon:info`. The results of this will be restricted by what framework gems you have included in your Gemfile.
 
@@ -440,7 +450,7 @@ We encourage you to experiment and let us know. Feel free to create a wiki artic
 
 Running your javascript tests on the BrowserStack infrastructure is easy with the included `browserstack` driver.
 
-In `teaspoon_env.rb` configure your driver to `config.driver = :browserstack`. You must add the browsers you'd like to test on as an array of hashes with key `capabilities` in `config.driver_options`. More details about the driver configurations are available on the [Using BrowserStack WebDriver](https://github.com/modeset/teaspoon/wiki/Using-BrowserStack-WebDriver) wiki article.
+In `teaspoon_env.rb` configure your driver to `config.driver = :browserstack`. You must add the browsers you'd like to test on as an array of hashes with key `capabilities` in `config.driver_options`. More details about the driver configurations are available on the [Using BrowserStack WebDriver](https://github.com/jejacks0n/teaspoon/wiki/Using-BrowserStack-WebDriver) wiki article.
 
 By default you can run 10 tests in parallel by default, and the number of tests running in parallel can be specified using the `max_parallel` driver option.
 
@@ -460,10 +470,9 @@ Now you can run Teaspoon locally and can see your tests running on the [BrowserS
 
 Licensed under the [MIT License](http://creativecommons.org/licenses/MIT/)
 
-Copyright 2014 [Mode Set](https://github.com/modeset)
+Copyright 2016 [jejacks0n](https://github.com/jejacks0n)
 
 All licenses for the bundled Javascript libraries are included (MIT/BSD).
 
 
 ## Make Code Not War
-![crest](https://secure.gravatar.com/avatar/aa8ea677b07f626479fd280049b0e19f?s=75)

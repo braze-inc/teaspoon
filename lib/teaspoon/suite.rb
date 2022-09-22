@@ -42,72 +42,83 @@ module Teaspoon
 
     protected
 
-    def specs
-      files = specs_from_file
-      return files unless files.empty?
-      glob.map { |file| asset_from_file(file) }
-    end
-
-    def asset_tree(sources)
-      sources.flat_map do |source|
-        asset = @env.find_asset(source)
-
-        if asset && asset.respond_to?(:logical_path)
-          assets = config.expand_assets ? asset.to_a : [asset]
-          assets.map { |a| asset_url(a) }
-        else
-          source.blank? ? [] : [source]
-        end
-      end.compact.uniq
-    end
-
-    def asset_url(asset)
-      params = []
-      params << "body=1" if config.expand_assets
-      params << "instrument=1" if instrument_file?(asset.pathname.to_s)
-      url = asset.logical_path
-      url += "?#{params.join("&")}" if params.any?
-      url
-    end
-
-    def instrument_file?(file)
-      return false unless coverage_requested?
-      return false if matched_spec_file?(file)
-      true
-    end
-
-    def coverage_requested?
-      @options[:coverage] || Teaspoon.configuration.use_coverage
-    end
-
-    def matched_spec_file?(file)
-      glob.include?(file)
-    end
-
-    def asset_from_file(original)
-      filename = original.gsub(Rails.root + "/spec/javascripts/", "")
-
-      normalize_js_extension(filename)
-    end
-
-    def normalize_js_extension(original_filename)
-      return original_filename
-    end
-
-    def glob
-      @glob ||= Dir[config.matcher.present? ? Teaspoon.configuration.root.join(config.matcher) : ""].sort!
-    end
-
-    def suite_configuration
-      config = Teaspoon.configuration.suite_configs[name]
-      raise Teaspoon::UnknownSuite.new(name: name) unless config.present?
-      config[:instance] ||= Teaspoon::Configuration::Suite.new(name, &config[:block])
-    end
-
-    def specs_from_file
-      Array(@options[:file]).map do |filename|
-        asset_from_file(File.expand_path(Teaspoon.configuration.root.join(filename)))
+      def specs
+        files = specs_from_file
+        return files unless files.empty?
+        glob.map { |file| asset_from_file(file) }
       end
-    end
+
+      def asset_tree(sources)
+        sources.flat_map do |source|
+          asset = @env.find_asset(source, accept: "application/javascript", pipeline: :debug)
+
+          if asset && asset.respond_to?(:logical_path)
+            asset_and_dependencies(asset).map { |a| asset_url(a) }
+          else
+            source.blank? ? [] : [source]
+          end
+        end.compact.uniq
+      end
+
+      def asset_url(asset)
+        params = []
+        params << "body=1" if config.expand_assets
+        params << "instrument=1" if instrument_file?(asset.filename)
+        url = asset.logical_path
+        url += "?#{params.join("&")}" if params.any?
+        url
+      end
+
+      def asset_and_dependencies(asset)
+        if config.expand_assets
+          if asset.respond_to?(:to_a)
+            asset.to_a
+          else
+            asset.metadata[:included].map { |uri| @env.load(uri) }
+          end
+        else
+          [asset]
+        end
+      end
+
+      def instrument_file?(file)
+        return false unless coverage_requested?
+        return false if matched_spec_file?(file)
+        true
+      end
+
+      def coverage_requested?
+        @options[:coverage] || Teaspoon.configuration.use_coverage
+      end
+
+      def matched_spec_file?(file)
+        glob.include?(file)
+      end
+
+      def asset_from_file(original)
+        filename = original.gsub(Rails.root + "/spec/javascripts/", "")
+  
+        normalize_js_extension(filename)
+      end
+  
+      def normalize_js_extension(original_filename)
+        return original_filename
+      end
+  
+      def glob
+        @glob ||= Dir[config.matcher.present? ? Teaspoon.configuration.root.join(config.matcher) : ""].sort!
+      end
+
+      def suite_configuration
+        config = Teaspoon.configuration.suite_configs[name]
+        raise Teaspoon::UnknownSuite.new(name: name) unless config.present?
+        config[:instance] ||= Teaspoon::Configuration::Suite.new(name, &config[:block])
+      end
+
+      def specs_from_file
+        Array(@options[:file]).map do |filename|
+          asset_from_file(File.expand_path(Teaspoon.configuration.root.join(filename)))
+        end
+      end
   end
 end

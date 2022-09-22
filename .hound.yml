@@ -1,6 +1,2 @@
-ruby:
-  enabled: true
-  config_file: .code-style-ruby.yml
-coffee_script:
-  enabled: true
-  config_file: .code-style-coffee.json
+rubocop:
+  config_file: .rubocop.yml

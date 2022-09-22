@@ -85,13 +85,14 @@ describe Teaspoon::Suite do
     it "returns just a file if one was requested" do
       subject.instance_variable_set(:@options, file: "spec/javascripts/foo.js")
       result = subject.spec_assets(false)
-      expect(result).to eql(["foo.js"])
+      expect(result).to eql(["foo.self.js?body=1"])
     end
 
     it "returns the asset tree (all dependencies resolved) if we want coverage" do
       result = subject.spec_assets(true)
 
       expect(result).to include(match(/teaspoon\/reporters\/console_spec(\.self)?\.js\?body=1/)) # Specs do not get instrumentation
+      expect(result).to include(match(/jquery(\.self)?\.js\?body=1&instrument=1/))
       expect(result).to include(match(/support\/json2(\.self)?\.js\?body=1&instrument=1/))
       expect(result).to include(match(/spec_helper(\.self)?\.js\?body=1&instrument=1/))
       expect(result).to include(match(/driver\/phantomjs\/runner(\.self)?\.js\?body=1&instrument=1/))
@@ -111,8 +112,9 @@ describe Teaspoon::Suite do
       it "includes instrumentation, but only at the root" do
         result = subject.spec_assets(true)
 
-        # Rails 4 expands spec_helper to include .js extension, Rails 3 doesn't
-        expect(result).to include(match(/spec_helper(\.self)?(\.js)?\?instrument=1/))
+        # Rails 4 expands spec_helper to include .js extension, Rails 3 doesn't.
+        # Also, with Sprockets 4 we want the 'debug' asset when not expanding assets.
+        expect(result).to include(match(/spec_helper(\.(self|debug))?(\.js)?\?instrument=1/))
       end
     end
   end
