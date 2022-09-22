@@ -24,7 +24,7 @@ module Teaspoon
     end
 
     def spec_files
-      glob.map { |file| { path: asset_from_file(file), name: asset_from_file(file) } }
+      glob.map { |file| { path: file, name: asset_from_file(file) } }
     end
 
     def spec_assets(include_helper = true)
